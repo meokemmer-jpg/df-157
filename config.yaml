@@ -1,0 +1,132 @@
+# DF-157 PVG-Wargame-History-Aggregator Cross-LLM-Verdict-Trend-Tracker [CRUX-MK]
+# Welle: 25 (Skeleton-Wave-2 W51-B)
+# Domain: META (Cross-LLM-Verdict-Historie, I_min)
+
+df_id: DF-157
+df_name: pvg-wargame-history-aggregator
+welle: 25
+domain: META
+status: SKELETON-CONDITIONAL
+crux-mk: true
+
+mission: |
+  Cross-LLM-Verdict-Trend-Aggregation aus Wargame-Files (branch-hub/cross-llm/).
+  Tracking Verdict-Tier-Distribution, Konvergenz-Rate, LLM-Outlier-Rate, Patch-Adoption-Rate.
+  NIEMALS Cross-LLM-Verdicts modifizieren oder neu rendern.
+
+# K11-K16
+k11_cascade_isolation: hard
+failure_blast_radius: 0
+dependency_dlq_strategy: "Eigenes State-File, append-only Trend-Log"
+
+k12_distillation_resistenz:
+  output_feeds_into_training: false
+  provenance_required_in_output: true
+  non_llm_validation_layer: true
+
+k13_independent_ground_truth:
+  external_anchor_type: filesystem
+  external_anchor_validation_frequency: per_run
+  pre_action_domain_check: true
+  pre_action_backup_check: false
+  pre_action_blast_radius_check: true
+
+k14_human_override_decay:
+  override_complexity: single_command
+  override_documentation_freshness_days: 30
+  martin_review_cadence: monthly
+  bus_factor_handover_drilled: false
+
+k15_entropy_budget:
+  entropy_added_loc_estimate: 180
+  entropy_added_concepts:
+    - Cross-LLM-Verdict-Aggregation
+    - Konvergenz-Rate-Tracking
+    - Outlier-LLM-Detection
+  entropy_justified_by_rho:
+    rho_low_eur_per_year: 3000
+    rho_high_eur_per_year: 15000
+    rho_confidence: PROVISIONAL
+
+k16_concurrent_spawn_protection: both
+lock_dir: /tmp/df-157.lock
+lock_stale_age_h: 6
+engine_pgrep_check: true
+lock_release_on: EXIT_INT_TERM
+
+# LC1-LC5
+lose_coupling:
+  LC1_graceful_degradation:
+    degradation_modes:
+      - full
+      - degraded_anchor
+      - standalone
+    degradation_test_required: true
+  LC2_direct_mode:
+    direct_mode_available: true
+    direct_mode_capability: 0.90
+    direct_mode_trigger: "DF_157_REAL_API_ENABLED=false"
+  LC3_circuit_breaker:
+    circuit_breaker_timeout_s: 30
+    circuit_breaker_open_threshold: 3
+    circuit_breaker_half_open_test_interval_s: 300
+  LC4_failure_isolation:
+    state_externalization: true
+    idempotent_operations: true
+    dependency_dlq_separate: false
+  LC5_health_check:
+    health_check_dependencies: []
+    health_check_degraded_score: 0.7
+    health_check_endpoint_or_file: branch-hub/state/df-157-health.json
+
+default_action:
+  description: "Mock-Mode: lese Wargame-Files (read-only), aggregiere Verdict-Trends, NIEMALS Verdict-Mutation"
+  rho_per_run_eur: 40
+  block_gates:
+    - gate_id: K11
+      block_reason: "Cascade-Containment fuer Read-Only-Pipeline"
+      false_block_cost_eur: 5
+      legitimate_block_condition: "Cascade-Trigger detektiert"
+  graceful_degradation_path: "Mock-Fallback (empty Wargame-Liste)"
+
+activation_gates:
+  DF_157_REAL_API_ENABLED:
+    default: false
+    description: "Real-Read der branch-hub/cross-llm/ Files"
+    requires_phronesis_ticket: false
+  DF_157_ENV:
+    default: dev
+
+q0_sperr_liste:
+  - id: Q0-1
+    rule: "Cross-LLM-Verdict-Modifikation"
+    enforcement: "DF hat read-only Filesystem-Access"
+  - id: Q0-2
+    rule: "Decision-Empfehlungen produzieren"
+    enforcement: "Decision-Keyword-RegEx"
+
+rho_estimate:
+  annual_eur: 8000
+  reason: "Cross-LLM-Verdict-Trend-Audit-Automation, manuelle Verdict-Reviews ~4h/Quartal eingespart"
+  schwer_quantifizierbar: true
+
+migration_provenance:
+  source_welle: 25
+  pre_skeleton_engine_loc: 180
+  reference_pattern: df-145
+  skeleton_created: 2026-05-13
+
+trinity_compliance:
+  options_presented_in_spec: true
+  variants:
+    - conservative: "Mock-Mode default"
+    - aggressive: "DF_157_REAL_API_ENABLED=true (Live-Aggregation)"
+    - contrarian: "DF-157 sunset wenn Verdict-Aggregation in Cross-LLM-Workflow integriert"
+
+crux_bindung:
+  K_0: "n/a"
+  Q_0: "epistemische Integritaet durch Cross-LLM-Verdict-Trend-Awareness"
+  I_min: "strukturierte K11-K16 + LC1-LC5 + Cross-LLM-Trend-Visibility"
+  W_0: "Manuelle Verdict-Reviews 4h/Quartal eingespart"
+
+# [CRUX-MK]
