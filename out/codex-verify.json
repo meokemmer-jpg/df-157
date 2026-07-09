@@ -1,0 +1,5 @@
+{
+  "verdict": "HOLDS",
+  "reason": "Der Test ruft die echten Funktionen mit mehreren unterschiedlich konvergierenden Verdict-Sets auf und prüft, dass Unanimity, 2-of-3-Outlier, Tier-Verteilung sowie Raten je nach adversarial gemischtem Input unterschiedlich berechnet werden.",
+  "ts": "2026-07-08T15:07:34.523283+00:00"
+}
